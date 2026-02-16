@@ -132,18 +132,19 @@ export default function GiftScreen() {
                                 <p className="text-base md:text-lg text-primary/80">
                                 I hope <span className="font-bold">నువ్వు బాగా ఉన్నినావు, బాగున్నావు, బాగుండాలి...</span><br></br>
                                 Once again Happy Birthday..🎂 MoodSwinger, Over-thinker, Rough & Tough Girl! <br></br>
+                                Hope you liked this..🎂✨
                                 </p>
 
                                 <div className="mt-5 flex justify-center">
                                     <span className="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold italic shadow-lg">
                                         My style of wishing to you <br></br>
-                                        Hope you liked this..🎂✨
+                                        😉
                                     </span>
                                 </div>
 
                                 <div className="mt-6 flex justify-end">
                                     <span className="text-lg font-bold italic text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">
-                                        — Suryateja✨
+                                        — ✍️Suryateja✨
                                     </span>
                                 </div>
 

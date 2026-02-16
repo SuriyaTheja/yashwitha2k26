@@ -22,6 +22,17 @@ export default function MessageScreen({ onNext }) {
     useEffect(() => {
         const messageElement = messageRef.current
         if (messageElement && opened) {
+            // Check if content is scrollable
+            const isScrollable = messageElement.scrollHeight > messageElement.clientHeight
+            
+            if (!isScrollable) {
+                // If not scrollable, show button immediately after animation
+                const timer = setTimeout(() => {
+                    setShowButton(true)
+                }, 600)
+                return () => clearTimeout(timer)
+            }
+            
             messageElement.addEventListener('scroll', handleScroll)
             // Check initial scroll position
             handleScroll()
@@ -74,7 +85,7 @@ export default function MessageScreen({ onNext }) {
                         <p className="mt-3">
                             There’s something I admire about you —{" "}
                             <span className="font-semibold italic text-yellow-400">
-                            the excitement you feel for even the smallest things
+                            The Excitement you feel for even the smallest things
                             </span>{" "}
                             and your eagerness to try and experience everything around you. 
                             That enthusiasm is one of your{" "}

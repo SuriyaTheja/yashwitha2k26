@@ -1,17 +1,13 @@
-import { Comfortaa, Shantell_Sans } from "next/font/google";
+import { Shantell_Sans } from "next/font/google";
 import "./globals.css";
 
-const comfortaa = Comfortaa({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-});
 const shantell = Shantell_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata = {
-  title: "HBD Yashwii",
+  title: "HBD🎉🎂",
   description: "Celebrate your day with joy and happiness!",
 };
 

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import LoaderScreen from "@/components/screens/LoaderScreen"
+import VerificationScreen from "@/components/screens/VerificationScreen"
 import IntroScreen from "@/components/screens/IntroScreen"
 import CakeScreen from "@/components/screens/CakeScreen"
 import BalloonScreen from "@/components/screens/BalloonScreen"
@@ -23,33 +24,22 @@ export default function HomePage() {
 
     let audioReady = false
 
-    // Add event listeners for debugging
     audioRef.current.addEventListener('canplaythrough', () => {
-      console.log('Audio can play through')
       audioReady = true
     })
     audioRef.current.addEventListener('error', (e) => {
-      console.log('Audio error:', e)
-    })
-    audioRef.current.addEventListener('loadstart', () => {
-      console.log('Audio load start')
+      console.error('Audio error:', e)
     })
 
     const startAudio = () => {
-      console.log('Attempting to play audio, ready:', audioReady)
       if (audioReady) {
-        audioRef.current.play().then(() => {
-          console.log('Audio started playing')
-        }).catch(error => {
-          console.log('Audio play failed:', error)
+        audioRef.current.play().catch(error => {
+          console.error('Audio play failed:', error)
         })
       } else {
-        // Wait for audio to be ready
         audioRef.current.addEventListener('canplay', () => {
-          audioRef.current.play().then(() => {
-            console.log('Audio started playing after canplay')
-          }).catch(error => {
-            console.log('Audio play failed after canplay:', error)
+          audioRef.current.play().catch(error => {
+            console.error('Audio play failed after canplay:', error)
           })
         }, { once: true })
       }
@@ -69,11 +59,12 @@ export default function HomePage() {
 
   const screens = [
     <LoaderScreen key="loader" onDone={() => setCurrentScreen(1)} />,
-    <IntroScreen key="intro" onNext={() => setCurrentScreen(2)} />,
-    <CakeScreen key="cake" onNext={() => setCurrentScreen(3)} />,
-    <BalloonScreen key="balloon" onNext={() => setCurrentScreen(4)} />,
-    <PhotosScreen key="photos" onNext={() => setCurrentScreen(5)} />,
-    <MessageScreen key="message" onNext={() => setCurrentScreen(6)} />,
+    <VerificationScreen key="verification" onNext={() => setCurrentScreen(2)} />,
+    <IntroScreen key="intro" onNext={() => setCurrentScreen(3)} />,
+    <CakeScreen key="cake" onNext={() => setCurrentScreen(4)} />,
+    <BalloonScreen key="balloon" onNext={() => setCurrentScreen(5)} />,
+    <PhotosScreen key="photos" onNext={() => setCurrentScreen(6)} />,
+    <MessageScreen key="message" onNext={() => setCurrentScreen(7)} />,
     <GiftScreen key="gift" />,
   ]
 

@@ -25,6 +25,7 @@ const photos = [
   "/images/15.jpeg",
   "/images/16.jpeg",
   "/images/17.jpeg",
+  "/images/18.gif",
 ]
 
 export default function PhotosScreen({ onNext }) {

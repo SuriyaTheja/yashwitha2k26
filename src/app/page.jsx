@@ -13,43 +13,39 @@ import GiftScreen from "@/components/screens/GiftScreen"
 
 export default function HomePage() {
   const [currentScreen, setCurrentScreen] = useState(0)
+  
+  // Ref for the HTML audio element
   const audioRef = useRef(null)
 
   // ===== AUDIO SETUP =====
-  useEffect(() => {
-    const audio = new Audio("/hbd.mp3")
-    audio.loop = true
-    audio.volume = 0.3
-    audio.preload = "auto"
-    audioRef.current = audio
-
-    let hasStarted = false
-
-    const tryPlay = () => {
-      if (!audioRef.current || hasStarted) return
-      hasStarted = true
-
-      audioRef.current.play().catch(() => {
-        // autoplay blocked silently
+  const playAudio = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3
+      // Catch prevents the console from throwing unhandled promise rejections
+      audioRef.current.play().catch((err) => {
+        console.warn("Autoplay prevented by browser:", err)
       })
-
-      document.removeEventListener("click", tryPlay)
-      document.removeEventListener("touchstart", tryPlay)
-    }
-
-    // User interaction required for autoplay
-    document.addEventListener("click", tryPlay)
-    document.addEventListener("touchstart", tryPlay)
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.currentTime = 0
-      }
-      document.removeEventListener("click", tryPlay)
-      document.removeEventListener("touchstart", tryPlay)
     }
   }, [])
+
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      playAudio()
+      // Remove listeners once audio is triggered
+      document.removeEventListener("click", handleFirstInteraction, true)
+      document.removeEventListener("touchstart", handleFirstInteraction, true)
+    }
+
+    // Adding 'true' at the end enables the CAPTURING phase.
+    // This ensures the document registers the tap BEFORE child buttons can stop propagation.
+    document.addEventListener("click", handleFirstInteraction, true)
+    document.addEventListener("touchstart", handleFirstInteraction, true)
+
+    return () => {
+      document.removeEventListener("click", handleFirstInteraction, true)
+      document.removeEventListener("touchstart", handleFirstInteraction, true)
+    }
+  }, [playAudio])
 
   // ===== NAVIGATION HANDLER =====
   const goTo = useCallback((screenIndex) => {
@@ -70,6 +66,9 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden relative">
+      
+      {/* HTML Audio element - much more reliable on mobile */}
+      <audio ref={audioRef} src="/hbd.mp3" loop preload="auto" />
 
       <div className="relative z-10 flex min-h-screen items-center justify-center p-4 md:p-6">
         <AnimatePresence mode="wait">

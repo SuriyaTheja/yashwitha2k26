@@ -32,26 +32,8 @@ export default function CakeScreen({ onNext }) {
   }
 
   return (
-    <div
-      className="
-        bg-[#fff8fc]
-        px-5 pb-8 pt-10           /* ← increased top padding so text fits inside */
-        sm:px-7 sm:pb-10 sm:pt-12
-        rounded-[40px]
-        sm:rounded-[60px]
-        drop-shadow-2xl
-        w-full
-        max-w-[420px]
-        mx-auto
-        flex flex-col
-        items-center
-        gap-6                   /* ← slightly more breathing room */
-        my-8
-        relative
-        overflow-hidden         /* ← prevents anything from visually escaping */
-      "
-    >
-      {/* Falling Confetti – starts from top of card */}
+    <>
+      {/* Full-Screen Falling Confetti/Decorations */}
       <AnimatePresence>
         {decorated && (
           <motion.div
@@ -60,37 +42,38 @@ export default function CakeScreen({ onNext }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="
-              absolute top-0 left-0 right-0
-              h-80                      /* ← taller so it reaches lower */
-              pointer-events-none
-              overflow-hidden
-              z-0
+              fixed inset-0 
+              pointer-events-none 
+              overflow-hidden 
+              z-50
             "
           >
-            {Array.from({ length: 20 }, (_, i) => (
+            {/* Increased count for full screen, using vh/vw for viewport mapping */}
+            {Array.from({ length: 40 }, (_, i) => (
               <motion.div
                 key={i}
                 initial={{
-                  x: Math.random() * 100 + "%",
-                  y: -40,
+                  x: 0,
+                  y: -50,
                   rotate: 0,
                   scale: 0,
                 }}
                 animate={{
-                  y: "100%",
+                  y: "120vh", /* Falls past the bottom of the screen */
                   rotate: Math.random() * 360,
-                  scale: [0, 1, 0.7],
+                  scale: [0, 1.2, 1],
                 }}
                 transition={{
-                  duration: 2.5 + Math.random() * 2,
-                  delay: Math.random() * 0.6,
+                  duration: 3 + Math.random() * 3, /* Slower, floatier fall */
+                  delay: Math.random() * 1.5,
                   ease: "easeOut",
+                  repeat: Infinity, /* Optional: Keeps falling while on screen */
                 }}
-                className="absolute w-3 h-3 rounded-full"
+                className="absolute w-4 h-4 rounded-full shadow-sm"
                 style={{
                   backgroundColor:
                     confettiColors[Math.floor(Math.random() * confettiColors.length)],
-                  left: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}vw`, /* Spreads across full width */
                 }}
               />
             ))}
@@ -98,109 +81,130 @@ export default function CakeScreen({ onNext }) {
         )}
       </AnimatePresence>
 
-      {/* Birthday Text – now comfortably inside the card */}
-      <motion.div
+      {/* Main Birthday Card */}
+      <div
         className="
-          relative z-10
+          bg-[#fff8fc]
+          px-5 pb-8 pt-10
+          sm:px-7 sm:pb-10 sm:pt-12
+          rounded-[40px]
+          sm:rounded-[60px]
+          drop-shadow-2xl
           w-full
-          text-center
-          font-semibold
-          text-secondary
-          drop-shadow-md
-          leading-tight
-          px-4
-          text-2xl
-          sm:text-3xl
-          md:text-4xl
-          break-words
+          max-w-[420px]
+          mx-auto
+          flex flex-col
+          items-center
+          gap-6
+          my-8
+          relative
+          overflow-hidden
         "
-        initial={{ opacity: 0, y: 20 }}
-        animate={lit ? { opacity: 1, y: 0 } : { opacity: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: "easeOut",
-          delay: lit ? 0.3 : 0,
-        }}
       >
-        Happy Birthday, YASHWITHA! 🤩
-      </motion.div>
-
-      {/* Cake Section */}
-      <div className="relative flex flex-col items-center gap-8 w-full mt-4">
-        <div
+        {/* Birthday Text */}
+        <motion.div
           className="
-            relative
-            h-64 sm:h-72 md:h-80
-            bg-gradient-to-b
-            from-white/80
-            to-rose-200
+            relative z-10
             w-full
-            flex
-            items-end
-            justify-center
-            rounded-[40px]
-            shadow-inner
-            pb-8
+            text-center
+            font-semibold
+            text-secondary
+            drop-shadow-md
+            leading-tight
+            px-4
+            text-2xl
+            sm:text-3xl
+            md:text-4xl
+            break-words
           "
+          initial={{ opacity: 0, y: 20 }}
+          animate={lit ? { opacity: 1, y: 0 } : { opacity: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+            delay: lit ? 0.3 : 0,
+          }}
         >
-          <Cake lit={lit} />
-        </div>
+          Happy Birthday, YASHWITHA! 🤩
+        </motion.div>
 
-        {/* Button Area */}
-        <div className="min-h-[70px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            {!decorated ? (
-              <motion.div
-                key="decorate"
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <Button
-                  onClick={decorate}
-                  className="bg-[#ffccd3] text-secondary"
+        {/* Cake Section */}
+        <div className="relative flex flex-col items-center gap-8 w-full mt-4">
+          <div
+            className="
+              relative
+              h-64 sm:h-72 md:h-80
+              bg-gradient-to-b
+              from-white/80
+              to-rose-200
+              w-full
+              flex
+              items-end
+              justify-center
+              rounded-[40px]
+              shadow-inner
+              pb-8
+            "
+          >
+            <Cake lit={lit} />
+          </div>
+
+          {/* Button Area */}
+          <div className="min-h-[70px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              {!decorated ? (
+                <motion.div
+                  key="decorate"
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <Sparkles size={18} className="mb-0.5" />
-                  Decorate
-                </Button>
-              </motion.div>
-            ) : !lit ? (
-              <motion.div
-                key="light"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <Button
-                  onClick={lightCandle}
-                  className="bg-[#ffccd3] text-secondary"
+                  <Button
+                    onClick={decorate}
+                    className="bg-[#ffccd3] text-secondary"
+                  >
+                    <Sparkles size={18} className="mb-0.5" />
+                    Decorate
+                  </Button>
+                </motion.div>
+              ) : !lit ? (
+                <motion.div
+                  key="light"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <Flame size={18} className="mb-0.5" />
-                  Light the Candle
-                </Button>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="next"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  transition: { duration: 0.5, delay: 1.5 },
-                }}
-              >
-                <Button
-                  onClick={onNext}
-                  className="bg-[#ffccd3] text-secondary"
+                  <Button
+                    onClick={lightCandle}
+                    className="bg-[#ffccd3] text-secondary"
+                  >
+                    <Flame size={18} className="mb-0.5" />
+                    Light the Candle
+                  </Button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="next"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 0.5, delay: 1.5 },
+                  }}
                 >
-                  Next <MoveRight size={18} className="mt-0.5" />
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  <Button
+                    onClick={onNext}
+                    className="bg-[#ffccd3] text-secondary"
+                  >
+                    Next <MoveRight size={18} className="mt-0.5" />
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

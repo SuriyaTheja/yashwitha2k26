@@ -19,17 +19,17 @@ const balloonWords = ["You", "Are", "A", "Star!"]
 const starWords = [
   "⭐ Star!",
   "👑 Queen",
-  "💪 Leading lady",
-  "⚔️ Warrior girl",
   "🏆 Champion",
   "❤️‍🔥 Braveheart",
-  "💫 Wonder woman",
   "💼 Girlboss",
   "👸 Princess",
   "🌟 Legend",
-  "🎭 Main character",
   "🔥 Radiant",
   "😍 Gorgeous",
+  "💪 Leading lady",
+  "⚔️ Warrior girl",
+  "💫 Wonder woman",
+  "🎭 Main character",
   "🌸 Beautiful soul",
   "💖 Dreaming girl",
   "✨ Amazing person",
@@ -47,7 +47,7 @@ export default function BalloonScreen({ onNext }) {
     if (poppedBalloons.includes(3)) {
       const interval = setInterval(() => {
         setCurrentStarWordIndex((prev) => (prev + 1) % starWords.length)
-      }, 750) // FASTER transition – 1 seconds per word
+      }, 500) // FASTER transition – 1 seconds per word
 
       return () => clearInterval(interval)
     }

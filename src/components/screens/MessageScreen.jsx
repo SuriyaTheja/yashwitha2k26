@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Button from "../Button"
 
@@ -9,36 +9,39 @@ export default function MessageScreen({ onNext }) {
     const [showButton, setShowButton] = useState(false)
     const messageRef = useRef(null)
 
-    const handleScroll = () => {
-        if (messageRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = messageRef.current
-            // Show button when scrolled to within 10px of the bottom
-            if (scrollTop + clientHeight >= scrollHeight - 10) {
-                setShowButton(true)
-            }
+    // Optimized scroll handler (stable reference)
+    const handleScroll = useCallback(() => {
+        const el = messageRef.current
+        if (!el) return
+
+        const { scrollTop, scrollHeight, clientHeight } = el
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
+            setShowButton(true)
         }
-    }
+    }, [])
 
     useEffect(() => {
-        const messageElement = messageRef.current
-        if (messageElement && opened) {
-            // Check if content is scrollable
-            const isScrollable = messageElement.scrollHeight > messageElement.clientHeight
-            
-            if (!isScrollable) {
-                // If not scrollable, show button immediately after animation
-                const timer = setTimeout(() => {
-                    setShowButton(true)
-                }, 600)
-                return () => clearTimeout(timer)
-            }
-            
-            messageElement.addEventListener('scroll', handleScroll)
-            // Check initial scroll position
-            handleScroll()
-            return () => messageElement.removeEventListener('scroll', handleScroll)
+        const el = messageRef.current
+        if (!el || !opened) return
+
+        const isScrollable = el.scrollHeight > el.clientHeight
+
+        // If not scrollable → show button after animation
+        if (!isScrollable) {
+            const timer = setTimeout(() => setShowButton(true), 600)
+            return () => clearTimeout(timer)
         }
-    }, [opened])
+
+        // Attach scroll listener
+        el.addEventListener("scroll", handleScroll, { passive: true })
+
+        // Check initial position
+        handleScroll()
+
+        return () => {
+            el.removeEventListener("scroll", handleScroll)
+        }
+    }, [opened, handleScroll])
 
     return (
         <div className="bg-[#fff8fc] p-7 rounded-[60px] drop-shadow-2xl min-w-48 w-full max-w-110 relative flex flex-col items-center gap-4 my-10">
@@ -53,7 +56,7 @@ export default function MessageScreen({ onNext }) {
             </div>
 
             <div
-                onClick={() => setOpened(!opened)}
+                onClick={() => setOpened(prev => !prev)}
                 className={`card relative h-71.25 w-full rounded-[40px] overflow-hidden shadow-inner cursor-pointer transition-all bg-linear-to-b from-white/80 to-pink-200 flex items-center justify-center max-w-71.25`}
             >
                 <div className={`cover ${opened ? "opacity-0" : "opacity-100"} pointer-events-none z-10 bg-[#ffedea]`} />
@@ -94,7 +97,7 @@ export default function MessageScreen({ onNext }) {
 
                         <p className="mt-3">
                             Your <span className="font-semibold text-purple-400">genuineness</span>{" "}
-                            is another trait that makes you unique. It’s not about whether you always 
+                            is another thing that makes you unique. It’s not about whether you always 
                             speak truth or lie, but the{" "}
                             <span className="italic font-semibold">
                             honesty in the way you express yourself
@@ -106,8 +109,7 @@ export default function MessageScreen({ onNext }) {
                             I believe you truly care about the people around you.{" "}
                             <span className="font-bold text-pink-400">
                             Don’t rush through things — go with the flow.
-                            </span>{" "}
-                            When your passion is steady and controlled, everything will naturally fall into place.
+                            </span>
                         </p>
 
                         <p className="mt-4 text-center">
@@ -131,12 +133,10 @@ export default function MessageScreen({ onNext }) {
                             (Don’t overthink — just a small opinion, message, and wish 🤍)
                         </p>
 
-                        </div>
-
+                    </div>
                 </div>
             </div>
 
-            {/* One Last Thing Button - Only shows when scrolled to bottom */}
             <AnimatePresence>
                 {opened && showButton && (
                     <motion.div

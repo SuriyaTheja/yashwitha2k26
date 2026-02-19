@@ -122,7 +122,7 @@ export default function VerificationScreen({ onNext }) {
             type="text"
             value={code}
             onChange={handleCodeChange}
-            placeholder="Enter code"
+            placeholder="Enter code from gift card"
             className="w-full px-4 py-3 rounded-[20px] border-2 border-pink-300 bg-white text-foreground text-center font-semibold placeholder:text-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-pink-200 focus:ring-opacity-50 transition-all duration-200"
           />
           {errors.code && (
@@ -174,7 +174,7 @@ export default function VerificationScreen({ onNext }) {
         transition={{ delay: 0.4 }}
         className="text-xs text-gray-500 text-center mt-2"
       >
-        💡 Hint: DOB format is YYYYMMDD
+        💡 Hint: Scan the Gift Card QR-Code for Secret Code
       </motion.div>
     </motion.div>
   )

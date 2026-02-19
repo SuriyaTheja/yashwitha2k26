@@ -94,10 +94,10 @@ export default function MessageScreen({ onNext }) {
 
                         <p className="mt-3">
                             Your <span className="font-semibold text-purple-400">genuineness</span>{" "}
-                            is another trait that makes you unique. It’s not about whether you always 
+                            is another thing that makes you unique. It’s not about whether you always 
                             speak truth or lie, but the{" "}
                             <span className="italic font-semibold">
-                            honesty in the way you express yourself
+                            Honesty in the way you express yourself
                             </span>{" "}
                             and show up as your real self.
                         </p>
@@ -106,8 +106,7 @@ export default function MessageScreen({ onNext }) {
                             I believe you truly care about the people around you.{" "}
                             <span className="font-bold text-pink-400">
                             Don’t rush through things — go with the flow.
-                            </span>{" "}
-                            When your passion is steady and controlled, everything will naturally fall into place.
+                            </span>
                         </p>
 
                         <p className="mt-4 text-center">

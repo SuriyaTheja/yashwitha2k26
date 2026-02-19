@@ -179,7 +179,7 @@ export default function VerificationScreen({ onNext }) {
               </motion.span>
             ) : (
               <>
-                Verify
+                Continue
                 <ArrowRight size={18} />
               </>
             )}
@@ -188,13 +188,14 @@ export default function VerificationScreen({ onNext }) {
       </form>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="text-xs text-gray-500 text-center mt-2"
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="text-xs text-gray-500 text-center mt-2 select-none"
       >
-        💡 Hint: DOB format is YYYYMMDD
+        💡 Hint: Scan the gift card QR-code for secret code
       </motion.div>
+
     </motion.div>
   )
 }

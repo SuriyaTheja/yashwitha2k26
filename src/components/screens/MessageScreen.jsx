@@ -64,73 +64,73 @@ export default function MessageScreen({ onNext }) {
                 >
                     <div className="leading-7 text-[15px]">
 
-                        <p className="text-lg">
+                        <p className="text-lg text-center">
                             Happy Birthday,{" "}
-                            <span className="font-bold italic text-pink-500 text-xl ml-1">
+                            <span className="font-bold italic text-pink-500 text-2xl ml-1 drop-shadow">
                             Yashwii! 🎉🎂
                             </span>
                         </p>
 
-                        <p className="mt-3">
+                        <p className="mt-4 text-center text-primary/80">
                             I hope your day is filled with{" "}
                             <span className="font-semibold text-pink-400">laughter</span>,{" "}
                             <span className="font-semibold text-purple-400">beautiful surprises</span>,{" "}
                             and all the{" "}
                             <span className="font-semibold text-rose-400">happiness</span>{" "}
-                            you deserve. Keep being the{" "}
-                            <span className="font-bold">amazing person</span>{" "}
-                            you are, spreading joy and positivity wherever you go.
+                            you truly deserve.
                         </p>
 
                         <p className="mt-3">
-                            There’s something I admire about you —{" "}
+                            There’s something, I admire about you —{" "}
                             <span className="font-semibold italic text-yellow-400">
-                            The Excitement you feel for even the smallest things
+                            the excitement you feel even for the smallest moments
                             </span>{" "}
-                            and your eagerness to try and experience everything around you. 
-                            That enthusiasm is one of your{" "}
-                            <span className="font-bold text-pink-400">best qualities</span>.
+                            and your curiosity to experience everything around you.  
+                            That energy is one of your{" "}
+                            <span className="font-bold text-pink-400">most beautiful qualities</span>.
                         </p>
 
                         <p className="mt-3">
                             Your <span className="font-semibold text-purple-400">genuineness</span>{" "}
-                            is another thing that makes you unique. It’s not about whether you always 
-                            speak truth or lie, but the{" "}
-                            <span className="italic font-semibold">
-                            Honesty in the way you express yourself
+                            makes you different in the best way.  
+                            It’s not about being perfect or always right, but the{" "}
+                            <span className="italic font-semibold text-pink-400">
+                            honesty in the way you express yourself
                             </span>{" "}
-                            and show up as your real self.
+                            and the way you show up as your real self.
                         </p>
 
                         <p className="mt-3">
-                            I believe you truly care about the people around you.{" "}
+                            I believe you truly care about the people around you, more than you show.{" "}
                             <span className="font-bold text-pink-400">
-                            Don’t rush through things — go with the flow.
+                            Don’t rush — just go with the flow.
                             </span>
                         </p>
 
-                        <p className="mt-4 text-center">
-                            <span className="font-bold text-lg text-yellow-400">
+                        <p className="mt-5 text-center">
+                            <span className="font-bold text-lg text-yellow-400 tracking-wide">
                             दुःखालयम् अशाश्वतम्
                             </span>
                         </p>
 
-                        <p className="mt-3">
+                        <p className="mt-4">
                             Live freely like a{" "}
                             <span className="italic text-sky-400">
-                            bird flying across the blue sky
+                            bird flying across the endless blue sky
                             </span>,{" "}
-                            embracing every moment with courage and joy. Wishing you{" "}
+                            embracing every moment with courage and joy.  
+                            Wishing you{" "}
                             <span className="font-bold text-pink-400">endless happiness</span>,{" "}
                             <span className="font-bold text-purple-400">success</span>,{" "}
-                            and all the sweet and beautiful things life has to offer.
+                            peace of mind, and all the sweet beautiful things life has to offer.
                         </p>
 
-                        <p className="mt-3 text-sm italic text-gray-400">
-                            (Don’t overthink — just a small opinion, message, and wish 🤍)
+                        <p className="mt-4 text-center text-sm italic text-gray-400">
+                            (Don’t overthink — just a small message, a small wish 🤍)
                         </p>
 
-                        </div>
+                    </div>
+
 
                 </div>
             </div>

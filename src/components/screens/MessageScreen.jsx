@@ -101,9 +101,9 @@ export default function MessageScreen({ onNext }) {
                         </p>
 
                         <p className="mt-3">
-                            I believe you truly care about the people around you, more than you show.{" "}
+                            I believe you truly care about the people around you, more than you show.<br/>
                             <span className="font-bold text-pink-400">
-                            Don’t rush — just go with the flow.
+                            Don’t rush. Go with the Flow.
                             </span>
                         </p>
 

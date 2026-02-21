@@ -23,7 +23,7 @@ export default function IntroScreen({ onNext }) {
                     style={{
                         filter: "drop-shadow(0 0 20px rgba(255,105,180,0.4))",
                     }}>
-                    A Overthinker was born today, 20 years ago!
+                    A Good-Girl was born today, 20 years ago!
                 </h1>
                 <p className="mt-4 text-foreground will-change-transform">Yes, it’s YOU! A little surprise awaits... from SURYATEJA</p>
             </div>
